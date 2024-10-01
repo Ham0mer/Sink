@@ -2,12 +2,7 @@
 import { BarChart } from '@/components/ui/chart-bar'
 async function fetchData() {
     try {
-        const response = await fetch('https://server.dogb.cn/api/v1/monitor/16', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
         // 检查响应状态
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
