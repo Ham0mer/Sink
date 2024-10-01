@@ -1,11 +1,15 @@
 <script setup>
 import { BarChart } from '@/components/ui/chart-bar'
-const axios = require('axios');
-
 async function fetchData() {
     try {
-        const response = await axios.get('https://server.dogb.cn/api/v1/monitor/16');
-        const data = response.data;
+        const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
+        
+        // 检查响应状态
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json(); // 解析响应为 JSON
 
         // 创建一个对象用于存储每一天的总延迟和计数
         const dailyStats = {};
@@ -40,7 +44,6 @@ async function fetchData() {
         console.error('Error fetching data:', error);
     }
 }
-
 // 调用函数
 const features = fetchData();
 </script>
