@@ -1,8 +1,62 @@
 <script setup>
 import { BarChart } from '@/components/ui/chart-bar'
 // 定义获取数据的函数
-let features = [];
-async function fetchData() {
+// let features = [];
+// async function fetchData() {
+//   try {
+//     const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
+    
+//     // 检查响应是否成功
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+    
+//     const data = await response.json();
+    
+//     // 处理数据
+//     features = processData(data);
+//   } catch (error) {
+//     console.error('Fetch error: ', error);
+//   }
+// }
+
+// // 数据处理函数
+// function processData(data) {
+//   const dailyData = {};
+
+//   // 遍历时间戳和延迟数据
+//   data.result[0].created_at.forEach((timestamp, index) => {
+//     const date = new Date(timestamp + 8 * 60 * 60 * 1000).toISOString().split('T')[0]; // 获取日期部分
+//     const delay = data.result[0].avg_delay[index];
+
+//     // 初始化日期数据
+//     if (!dailyData[date]) {
+//       dailyData[date] = { avg_delay: [], count: 0 };
+//     }
+
+//     // 收集延迟数据
+//     dailyData[date].avg_delay.push(delay);
+//     dailyData[date].count += 1;
+//   });
+
+//   // 计算每天的平均延迟
+//   return Object.keys(dailyData).map(date => {
+//     const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
+//     return {
+//       date: date,
+//       average_delay: avgDelay,
+//       count: dailyData[date].count
+//     };
+//   });
+// }
+
+// // 调用函数并在数据加载后访问 features
+// fetchData().then(() => {
+//   // 在数据获取后可以访问 features
+//   console.log('Features outside:', features);
+// });
+// console.log(features);
+
   try {
     const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
     
@@ -14,48 +68,42 @@ async function fetchData() {
     const data = await response.json();
     
     // 处理数据
-    features = processData(data);
+      const dailyData = {};
+
+    // 遍历时间戳和延迟数据
+    data.result[0].created_at.forEach((timestamp, index) => {
+      const date = new Date(timestamp + 8 * 60 * 60 * 1000).toISOString().split('T')[0]; // 获取日期部分
+      const delay = data.result[0].avg_delay[index];
+  
+      // 初始化日期数据
+      if (!dailyData[date]) {
+        dailyData[date] = { avg_delay: [], count: 0 };
+      }
+  
+      // 收集延迟数据
+      dailyData[date].avg_delay.push(delay);
+      dailyData[date].count += 1;
+    });
+  
+    // 计算每天的平均延迟
+    const features = Object.keys(dailyData).map(date => {
+      const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
+      return {
+        date: date,
+        average_delay: avgDelay,
+        count: dailyData[date].count
+      };
+    });
   } catch (error) {
     console.error('Fetch error: ', error);
   }
-}
 
-// 数据处理函数
-function processData(data) {
-  const dailyData = {};
 
-  // 遍历时间戳和延迟数据
-  data.result[0].created_at.forEach((timestamp, index) => {
-    const date = new Date(timestamp + 8 * 60 * 60 * 1000).toISOString().split('T')[0]; // 获取日期部分
-    const delay = data.result[0].avg_delay[index];
+ console.log(features);
 
-    // 初始化日期数据
-    if (!dailyData[date]) {
-      dailyData[date] = { avg_delay: [], count: 0 };
-    }
 
-    // 收集延迟数据
-    dailyData[date].avg_delay.push(delay);
-    dailyData[date].count += 1;
-  });
 
-  // 计算每天的平均延迟
-  return Object.keys(dailyData).map(date => {
-    const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
-    return {
-      date: date,
-      average_delay: avgDelay,
-      count: dailyData[date].count
-    };
-  });
-}
-
-// 调用函数并在数据加载后访问 features
-fetchData().then(() => {
-  // 在数据获取后可以访问 features
-  console.log('Features outside:', features);
-});
-console.log(features);
+  
 </script>
 <template>
   <BarChart
