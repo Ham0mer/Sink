@@ -49,7 +49,7 @@ const features = generateData(startDate, 30);
   /* 手机上显示8列 */
   @media (max-width: 767px) {
     .grid-container {
-      grid-template-columns: repeat(8, 1fr); /* 8列 */
+      grid-template-columns: repeat(6, 1fr); /* 8列 */
     }
   }
 
@@ -71,7 +71,7 @@ const features = generateData(startDate, 30);
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger as-child>
-                <Button :variant="item.ms > 300 ? 'destructive' : 'outline'">
+                <Button :variant="item.ms > 300 ? 'destructive' : ''">
                 {{ item.ms > 300 ? '异常' : '正常' }}
                 </Button>
               </TooltipTrigger>
