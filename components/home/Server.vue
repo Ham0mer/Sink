@@ -51,7 +51,7 @@ const totalRequired = 30;
 const lastDate = new Date(dailyResults[dailyResults.length - 1]?.date); // 获取最后一个日期
 
 while (dailyResults.length < totalRequired) {
-  lastDate.setDate(lastDate.getDate() - 1); // 向前一天
+  lastDate.setDate(lastDate.getDate() + 1); // 向后一天
   dailyResults.push({
     date: lastDate.toISOString().split('T')[0], // 格式化为 YYYY-MM-DD
     ms: 0,
