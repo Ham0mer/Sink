@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/tooltip'
 const generateData = (startDate, count) => {  
   const data = [];  
-  const msRange = [1, 10000]; // 毫秒数的范围（这里只是示例，实际可以根据需要调整）  
+  const msRange = [1, 1000]; // 毫秒数的范围（这里只是示例，实际可以根据需要调整）  
   
   for (let i = 0; i < count; i++) {  
     // 生成随机毫秒数（这里转换为字符串，但通常应该是数字）  
@@ -41,7 +41,7 @@ const features = generateData(startDate, 30);
 // ])
 </script>
 <template>
-    <div class="grid gap-2 sm:grid-cols-8" style="grid-template-columns: repeat(15, 1fr);">
+    <div class="grid gap-2 sm:grid-cols-8 lg:grid-cols-15">
       <div
         v-for="item in features"
         :key="item.time"
@@ -51,8 +51,8 @@ const features = generateData(startDate, 30);
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger as-child>
-                <Button :variant="item.ms > 3000 ? 'destructive' : 'outline'">
-                {{ item.ms > 3000 ? '异常' : '正常' }}
+                <Button :variant="item.ms > 300 ? 'destructive' : 'outline'">
+                {{ item.ms > 300 ? '异常' : '正常' }}
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
