@@ -57,6 +57,7 @@ onMounted(() => {
   <BarChart
     :data="features"
     index="date"
+    colors="Zinc"
     :categories="['ms']"
     :y-formatter="(tick, i) => {
       return typeof tick === 'number'
