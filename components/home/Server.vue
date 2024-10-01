@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@/components/ui/button'
+import { BarChart } from '@/components/ui/chart-bar'
 import {
   Tooltip,
   TooltipContent,
@@ -40,47 +40,15 @@ const features = generateData(startDate, 30);
 //   },
 // ])
 </script>
-<style>
-  .grid-container {
-    display: grid;
-    gap: 8px; /* 定义网格项的间距 */
-  }
-
-  /* 手机上显示8列 */
-  @media (max-width: 767px) {
-    .grid-container {
-      grid-template-columns: repeat(6, 1fr); /* 8列 */
-    }
-  }
-
-  /* 电脑上显示15列 */
-  @media (min-width: 768px) {
-    .grid-container {
-      grid-template-columns: repeat(15, 1fr); /* 15列 */
-    }
-  }
-</style>
 <template>
-    <div class="grid-container">
-      <div
-        v-for="item in features"
-        :key="item.time"
-        class="flex items-start gap-1"
-      >
-        <div>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger as-child>
-                <Button :variant="item.ms > 300 ? 'destructive' : ''">
-                {{ item.ms > 300 ? '异常' : '正常' }}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{{ item.ms }}ms</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-      </div>
-    </div>
+  <BarChart
+    :data="features"
+    index="time"
+    :categories="['ms']"
+    :y-formatter="(tick, i) => {
+      return typeof tick === 'number'
+        ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
+        : ''
+    }"
+  />
 </template>
