@@ -2,7 +2,6 @@
 import { BarChart } from '@/components/ui/chart-bar'
 async function fetchData() {
     try {
-        // const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
         const response = await fetch('https://server.dogb.cn/api/v1/monitor/16', {
             method: 'GET',
             headers: {
