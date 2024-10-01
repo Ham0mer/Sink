@@ -50,8 +50,9 @@ function processData(data) {
   return dailyResults;
 }
 // 调用函数
-const features = fetchData();
-console.log(features);
+fetchData().then(features => {
+  console.log('Features outside:', features);
+});
 </script>
 <template>
   <BarChart
