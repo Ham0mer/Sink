@@ -25,7 +25,7 @@ function processData(data) {
 
   // 遍历时间戳和延迟数据
   data.result[0].created_at.forEach((timestamp, index) => {
-    const date = new Date(timestamp).toISOString().split('T')[0]; // 获取日期部分
+    const date = new Date(timestamp + 8 * 60 * 60 * 1000).toISOString().split('T')[0]; // 获取日期部分
     const delay = data.result[0].avg_delay[index];
 
     // 初始化日期数据
