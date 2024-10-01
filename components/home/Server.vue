@@ -51,8 +51,8 @@ const features = generateData(startDate, 30);
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger as-child>
-                <Button variant="outline">
-                  正常
+                <Button :variant="item.ms > 3000 ? 'destructive' : 'outline'">
+                {{ item.ms > 3000 ? '异常' : '正常' }}
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
