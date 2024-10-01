@@ -48,14 +48,14 @@ function processData(data) {
     };
   });
 }
-// 调用函数
+let data = [];
 fetchData().then(features => {
-  console.log('Features outside:', features);
+  data = features
 });
 </script>
 <template>
   <BarChart
-    :data="features"
+    :data="data"
     index="date"
     :categories="['average_delay']"
     :y-formatter="(tick, i) => {
