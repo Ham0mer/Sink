@@ -41,6 +41,7 @@ async function fetchData() {
 
         // 输出结果
         console.log(averageDelays);
+        return averageDelays;
 
     } catch (error) {
         console.error('Error fetching data:', error);
