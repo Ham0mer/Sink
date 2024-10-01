@@ -1,5 +1,4 @@
 <script setup>
-import CustomChartTooltip from './CustomChartTooltip.vue'
 import { BarChart } from '@/components/ui/chart-bar'
 // 定义获取数据的函数
 const features = ref([]); // 用于存储处理后的数据
@@ -63,6 +62,5 @@ onMounted(() => {
         ? `${new Intl.NumberFormat('us').format(tick).toString()} 毫秒`
         : ''
     }"
-    :custom-tooltip="CustomChartTooltip"
   />
 </template>
