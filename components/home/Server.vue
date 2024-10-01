@@ -1,6 +1,7 @@
 <script setup>
 import { BarChart } from '@/components/ui/chart-bar'
 // 定义获取数据的函数
+let features = [];
 async function fetchData() {
   try {
     const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
@@ -13,7 +14,7 @@ async function fetchData() {
     const data = await response.json();
     
     // 处理数据
-    return processData(data);
+    features = processData(data);
   } catch (error) {
     console.error('Fetch error: ', error);
   }
@@ -48,11 +49,13 @@ function processData(data) {
     };
   });
 }
-let data = [];
-fetchData().then(features => {
-  data = features
+
+// 调用函数并在数据加载后访问 features
+fetchData().then(() => {
+  // 在数据获取后可以访问 features
+  console.log('Features outside:', features);
 });
-console.log(data);
+console.log(features);
 </script>
 <template>
   <BarChart
