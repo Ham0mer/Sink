@@ -48,12 +48,12 @@ let dailyResults = Object.keys(dailyData).map(date => {
 
 // 确保有 30 组数据，不足的用空对象填充
 const totalRequired = 30;
-const lastDate = new Date(dailyResults[dailyResults.length - 1]?.date); // 获取最后一个日期
+const lastDate = new Date(dailyResults[dailyResults.length - 1]?.date);
 
 while (dailyResults.length < totalRequired) {
-  lastDate.setDate(lastDate.getDate() + 1); // 向后一天。
+  lastDate.setDate(lastDate.getDate() + 1);
   dailyResults.push({
-    date: lastDate.toISOString().split('T')[0], // 格式化为 YYYY-MM-DD
+    date: lastDate.toISOString().split('T')[0],
     ms: 0,
     count: 0
   });
