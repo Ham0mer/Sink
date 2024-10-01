@@ -21,14 +21,14 @@ onMounted(() => {
         target="_blank"
         title="QWQ.GS"
       >
-        &copy; {{ new Date().getFullYear() }} Products of HTML.ZONE
+        &copy; {{ new Date().getFullYear() }} Products of QWQ.GS
       </a>
       <span
         class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start"
       >
         <a
           ref="email"
-          href="mailto:w.$qwq.gs"
+          href="mailto:w$qwq.gs"
           title="Email"
           class="text-gray-400 hover:text-gray-500"
         >
