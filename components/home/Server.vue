@@ -36,15 +36,31 @@ function processData(data) {
     dailyData[date].count += 1;
   });
 
-  // 计算每天的平均延迟
-  features.value = Object.keys(dailyData).map(date => {
-    const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
-    return {
-      date: date,
-      ms: parseFloat(avgDelay.toFixed(3)), // 保留三位小数
-      count: dailyData[date].count
-    };
+// 计算每天的平均延迟
+let dailyResults = Object.keys(dailyData).map(date => {
+  const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
+  return {
+    date: date,
+    ms: parseFloat(avgDelay.toFixed(3)), // 保留三位小数
+    count: dailyData[date].count
+  };
+});
+
+// 确保有 30 组数据，不足的用空对象填充
+const totalRequired = 30;
+const lastDate = new Date(dailyResults[dailyResults.length - 1]?.date); // 获取最后一个日期
+
+while (dailyResults.length < totalRequired) {
+  lastDate.setDate(lastDate.getDate() - 1); // 向前一天
+  dailyResults.push({
+    date: lastDate.toISOString().split('T')[0], // 格式化为 YYYY-MM-DD
+    ms: 0,
+    count: 0
   });
+}
+
+// 将结果赋值给 features
+features.value = dailyResults.slice(0, totalRequired);
 }
 
 // 在组件挂载时调用 fetchData
