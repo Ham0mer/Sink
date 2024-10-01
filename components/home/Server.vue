@@ -25,7 +25,7 @@ const features = ref([
         :key="item.time"
         class="flex items-start gap-4"
       >
-        <div class="w-8 h-8 p-2 mt-1 bg-black rounded-full shrink-0">
+        <div>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger as-child>
