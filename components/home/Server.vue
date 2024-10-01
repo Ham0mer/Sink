@@ -19,7 +19,7 @@ const features = ref([
 ])
 </script>
 <template>
-    <div class="grid gap-8 md:gap-16 sm:grid-cols-2 md:grid-cols-3">
+    <div class="grid gap-2 md:gap-16 sm:grid-cols-2 md:grid-cols-30">
       <div
         v-for="item in features"
         :key="item.time"
