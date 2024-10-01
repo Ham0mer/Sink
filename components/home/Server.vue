@@ -1,51 +1,51 @@
 <script setup>
 import { BarChart } from '@/components/ui/chart-bar'
 async function fetchData() {
-    try {
-        const response = await fetch('https://server.dogb.cn/api/v1/monitor/16', {
-            method: 'GET',
-            mode: 'cors',
-        });
-        // 检查响应状态
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+    const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
+    const data = await response.json();
+
+    return data.result[0];
+}
+
+async function analyzeData() {
+    const { avg_delay, created_at } = await fetchData();
+
+    const dailyData = {};
+    const now = Date.now();
+    const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+
+    for (let i = 0; i < created_at.length; i++) {
+        const timestamp = created_at[i];
+        const delay = avg_delay[i];
+
+        if (timestamp >= thirtyDaysAgo) {
+            const date = new Date(timestamp).toISOString().split('T')[0];
+
+            if (!dailyData[date]) {
+                dailyData[date] = {
+                    totalDelay: 0,
+                    count: 0
+                };
+            }
+
+            dailyData[date].totalDelay += delay;
+            dailyData[date].count += 1;
         }
-
-        const data = await response.json(); // 解析响应为 JSON
-
-        // 创建一个对象用于存储每一天的总延迟和计数
-        const dailyStats = {};
-
-        // 遍历结果
-        data.result.forEach(item => {
-            item.created_at.forEach((timestamp, index) => {
-                const date = new Date(timestamp).toISOString().split('T')[0]; // 格式化日期
-                const delay = item.avg_delay[index];
-
-                if (!dailyStats[date]) {
-                    dailyStats[date] = { totalDelay: 0, count: 0 };
-                }
-
-                dailyStats[date].totalDelay += delay; // 累加延迟
-                dailyStats[date].count += 1; // 计数
-            });
-        });
-
-        // 计算每一天的平均延迟
-        const averageDelays = Object.entries(dailyStats).map(([date, stats]) => {
-            return {
-                date: date,
-                avgDelay: (stats.totalDelay / stats.count).toFixed(3) // 计算平均值并保留三位小数
-            };
-        });
-
-        // 输出结果
-        console.log(averageDelays);
-        return averageDelays;
-
-    } catch (error) {
-        console.error('Error fetching data:', error);
     }
+
+    const result = Object.keys(dailyData).map(date => {
+        const { totalDelay, count } = dailyData[date];
+        const avg = totalDelay / count;
+
+        return {
+            date,
+            avg_delay: avg,
+            avg_connectivity: count
+        };
+    });
+
+    console.log(result);
+    return result;
 }
 // 调用函数
 const features = fetchData();
