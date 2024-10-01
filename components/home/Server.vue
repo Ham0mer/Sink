@@ -47,13 +47,11 @@ function processData(data) {
       count: dailyData[date].count
     };
   });
-
-  // 输出结果
-  console.log(dailyResults);
   return dailyResults;
 }
 // 调用函数
 const features = fetchData();
+console.log(features);
 </script>
 <template>
   <BarChart
