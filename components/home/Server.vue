@@ -1,4 +1,5 @@
 <script setup>
+import CustomChartTooltip from './CustomChartTooltip.vue'
 import { BarChart } from '@/components/ui/chart-bar'
 // 定义获取数据的函数
 const features = ref([]); // 用于存储处理后的数据
@@ -41,7 +42,7 @@ function processData(data) {
     const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
     return {
       date: date,
-      average_delay: parseFloat(avgDelay.toFixed(3)), // 保留三位小数
+      ms: parseFloat(avgDelay.toFixed(3)), // 保留三位小数
       count: dailyData[date].count
     };
   });
@@ -51,17 +52,17 @@ function processData(data) {
 onMounted(() => {
   fetchData();
 });
-console.log(features);
 </script>
 <template>
   <BarChart
     :data="features"
     index="date"
-    :categories="['average_delay']"
+    :categories="['ms']"
     :y-formatter="(tick, i) => {
       return typeof tick === 'number'
         ? `${new Intl.NumberFormat('us').format(tick).toString()} 毫秒`
         : ''
     }"
+    :custom-tooltip="CustomChartTooltip"
   />
 </template>
