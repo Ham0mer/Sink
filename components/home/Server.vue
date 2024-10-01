@@ -5,6 +5,9 @@ async function fetchData() {
         const response = await fetch('https://server.dogb.cn/api/v1/monitor/16', {
             method: 'GET',
             mode: 'cors',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            }
         });
         // 检查响应状态
         if (!response.ok) {
