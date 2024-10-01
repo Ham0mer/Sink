@@ -47,7 +47,7 @@ const features = generateData(startDate, 30);
     :categories="['ms']"
     :y-formatter="(tick, i) => {
       return typeof tick === 'number'
-        ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
+        ? `${new Intl.NumberFormat('us').format(tick).toString()} 毫秒`
         : ''
     }"
   />
