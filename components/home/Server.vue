@@ -52,6 +52,7 @@ let data = [];
 fetchData().then(features => {
   data = features
 });
+console.log(data);
 </script>
 <template>
   <BarChart
