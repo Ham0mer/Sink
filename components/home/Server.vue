@@ -54,7 +54,7 @@ const features = fetchData();
   <BarChart
     :data="features"
     index="date"
-    :categories="['avgDelay']"
+    :categories="['avg_delay']"
     :y-formatter="(tick, i) => {
       return typeof tick === 'number'
         ? `${new Intl.NumberFormat('us').format(tick).toString()} 毫秒`
