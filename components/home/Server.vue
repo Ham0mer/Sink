@@ -48,7 +48,7 @@ async function analyzeData() {
     return result;
 }
 // 调用函数
-const features = fetchData();
+const features = analyzeData();
 </script>
 <template>
   <BarChart
