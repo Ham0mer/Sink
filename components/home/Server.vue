@@ -13,7 +13,7 @@ async function fetchData() {
     const data = await response.json();
     
     // 处理数据
-    processData(data);
+    return processData(data);
   } catch (error) {
     console.error('Fetch error: ', error);
   }
@@ -39,7 +39,7 @@ function processData(data) {
   });
 
   // 计算每天的平均延迟
-  const dailyResults = Object.keys(dailyData).map(date => {
+  return Object.keys(dailyData).map(date => {
     const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
     return {
       date: date,
@@ -47,7 +47,6 @@ function processData(data) {
       count: dailyData[date].count
     };
   });
-  return dailyResults;
 }
 // 调用函数
 fetchData().then(features => {
