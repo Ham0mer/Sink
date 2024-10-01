@@ -41,7 +41,7 @@ const features = generateData(startDate, 30);
 // ])
 </script>
 <template>
-    <div class="grid gap-2 md:gap-16 sm:grid-cols-2 md:grid-cols-30">
+    <div class="grid gap-2 md:gap-2 sm:grid-cols-15 md:grid-cols-30">
       <div
         v-for="item in features"
         :key="item.time"
