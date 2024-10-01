@@ -3,40 +3,46 @@ import { AreaChart, Hourglass, Link, Paintbrush, ServerOff, Sparkles } from 'luc
 
 const features = ref([
   {
-    title: 'URL Shortening',
+    title: '探针',
     description:
-          'Compress your URLs to their minimal length.',
-    icon: Link,
-  },
-  {
-    title: 'Analytics',
-    description:
-          'Monitor link analytics and gather insightful statistics.',
-    icon: AreaChart,
-  },
-  {
-    title: 'Serverless',
-    description:
-          'Deploy without the need for traditional servers.',
-    icon: ServerOff,
-  },
-  {
-    title: 'Customizable Slug',
-    description:
-          'Support for personalized slugs.',
-    icon: Paintbrush,
-  },
-  {
-    title: 'AI Slug',
-    description:
-          'Leverage AI to generate slugs.',
+          '哪吒面板搭建的探针.',
     icon: Sparkles,
+    link: 'https://server.dogb.cn',
   },
   {
-    title: 'Link Expiration',
+    title: 'Bing每日壁纸',
     description:
-          'Set expiration dates for your links.',
+          '每天一张高质量bing壁纸.',
+    icon: AreaChart,
+    link: 'https://server.dogb.cn',
+  },
+  {
+    title: 'Bark',
+    description:
+          'Bark公益推送.',
+    icon: ServerOff,
+    link: 'https://msg.dogb.cn',
+  },
+  {
+    title: '博客',
+    description:
+          '从10年前就断断续续，尝试过很多风格的，最后没有数据的博客.',
+    icon: Paintbrush,
+    link: 'https://dogb.cn',
+  },
+  {
+    title: '私人短链接',
+    description:
+          '面条大佬的程序，部署在大善人Cloudflare.',
+    icon: Link,
+    link: 'https://qwq.gs',
+  },
+  {
+    title: '小七商店',
+    description:
+          '独角数卡.',
     icon: Hourglass,
+    link: 'https://777911.xyz',
   },
 ])
 </script>
@@ -45,10 +51,10 @@ const features = ref([
   <main class="pt-16 md:py-12">
     <div class="md:pb-12">
       <h2 class="text-4xl font-bold lg:text-5xl lg:tracking-tight">
-        Features
+        其他站点
       </h2>
       <p class="my-8 text-lg md:mb-0 text-slate-600">
-        Simple and sufficient functionality
+        看起来有点乱
       </p>
     </div>
 
@@ -65,9 +71,13 @@ const features = ref([
           />
         </div>
         <div>
-          <h3 class="text-lg font-semibold">
-            {{ item.title }}
-          </h3>
+          <a
+            :href="item.link"
+          >
+            <h3 class="text-lg font-semibold">
+              {{ item.title }}
+            </h3>
+          </a>
           <p class="mt-2 leading-relaxed text-slate-500">
             {{ item.description }}
           </p>
