@@ -17,3 +17,8 @@ export function useAPI(api: string, options?: object): Promise<unknown> {
     return Promise.reject(error)
   })
 }
+export function pubAPI(api: string, options?: object): Promise<unknown> {
+  return $fetch(api, defu(options || {})).catch((error) => {
+    return Promise.reject(error)
+  })
+}

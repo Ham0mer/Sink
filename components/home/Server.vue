@@ -4,7 +4,7 @@ import { AreaChart } from '@/components/ui/chart-area'
 const timeDelayCollection = ref([])
 
 async function fetchData() {
-  const result = await useAPI('/api/server')
+  const result = await pubAPI('/api/server')
   const createdAtList = result.created_at
   const avgDelayList = result.avg_delay
   const loopLimit = Math.min(createdAtList.length, 300)
