@@ -22,8 +22,7 @@ const fetchData = async () => {
     // 将时间和延迟 push 到集合
     for (let i = 0; i < loopLimit; i++) {
       const formattedDate = new Date(createdAtList[i] + 8 * 60 * 60 * 1000)
-        .toISOString()
-        .split('T')[0];
+        .toLocaleString('zh-CN', { hour12: false });
 
       const delay = avgDelayList[i];
 
