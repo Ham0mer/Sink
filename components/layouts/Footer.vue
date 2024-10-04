@@ -1,5 +1,5 @@
 <script setup>
-import { BloggerIcon, GitHubIcon, GmailIcon, MastodonIcon, TelegramIcon, XIcon } from 'vue3-simple-icons'
+import { GmailIcon, TelegramIcon } from 'vue3-simple-icons'
 
 const email = ref(null)
 onMounted(() => {
@@ -11,7 +11,7 @@ onMounted(() => {
   <section class="md:pt-6">
     <div class="container flex flex-col items-center py-8 mx-auto sm:flex-row">
       <a
-        href="/"
+        href="https://github.com/ccbikai/Sink"
         class="text-xl font-black leading-none text-gray-900 select-none dark:text-gray-100 logo"
         title="Sink"
       >Sink</a>

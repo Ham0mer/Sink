@@ -74,28 +74,28 @@ watch(dateRange, (newValue) => {
     </SelectTrigger>
     <SelectContent>
       <SelectItem value="today">
-        Today
+        今天
       </SelectItem>
       <SelectItem value="last-24h">
-        Last 24 hours
+        24h
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="this-week">
-        This week
+        本周
       </SelectItem>
       <SelectItem value="last-7d">
-        Last 7 days
+        七天
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="this-month">
-        This month
+        本月
       </SelectItem>
       <SelectItem value="last-30d">
-        Last 30 days
+        30天
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="last-90d">
-        Last 90 days
+        90天
       </SelectItem>
       <SelectSeparator />
       <SelectItem value="custom">

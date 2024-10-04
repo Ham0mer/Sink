@@ -25,7 +25,7 @@ async function onSubmit(form) {
   }
   catch (e) {
     console.error(e)
-    toast.error('Login failed, please try again.', {
+    toast.error('登陆失败，请再次尝试！', {
       description: e.message,
     })
   }
@@ -36,10 +36,10 @@ async function onSubmit(form) {
   <Card class="w-full max-w-sm">
     <CardHeader>
       <CardTitle class="text-2xl">
-        Login
+        登录
       </CardTitle>
       <CardDescription>
-        Enter your site token to login.
+        输入密钥登录.
       </CardDescription>
     </CardHeader>
     <CardContent class="grid gap-4">
@@ -57,7 +57,7 @@ async function onSubmit(form) {
           </AlertDescription>
         </Alert>
         <Button class="w-full">
-          Login
+          登录
         </Button>
       </AutoForm>
     </CardContent>

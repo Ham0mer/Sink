@@ -1,33 +1,33 @@
 <script setup>
-import { AreaChart, Hourglass, Link, Paintbrush, ServerOff, Sparkles } from 'lucide-vue-next'
+import { BadgeDollarSign, Images, Link, Rss, SendHorizontal, ServerCrash } from 'lucide-vue-next'
 
 const features = ref([
   {
     title: '探针',
     description:
           '哪吒面板搭建的探针.',
-    icon: Sparkles,
+    icon: ServerCrash,
     link: 'https://server.dogb.cn',
   },
   {
     title: 'Bing每日壁纸',
     description:
           '每天一张高质量bing壁纸.',
-    icon: AreaChart,
-    link: 'https://server.dogb.cn',
+    icon: Images,
+    link: 'https://bing.dogb.cn',
   },
   {
     title: 'Bark',
     description:
           'Bark公益推送.',
-    icon: ServerOff,
+    icon: SendHorizontal,
     link: 'https://msg.dogb.cn',
   },
   {
     title: '博客',
     description:
           '从10年前就断断续续，尝试过很多风格的，最后没有数据的博客.',
-    icon: Paintbrush,
+    icon: Rss,
     link: 'https://dogb.cn',
   },
   {
@@ -41,7 +41,7 @@ const features = ref([
     title: '小七商店',
     description:
           '独角数卡.',
-    icon: Hourglass,
+    icon: BadgeDollarSign,
     link: 'https://777911.xyz',
   },
 ])
@@ -72,7 +72,7 @@ const features = ref([
         </div>
         <div>
           <a
-            :href="item.link"
+            :href="item.link" target="_blank"
           >
             <h3 class="text-lg font-semibold">
               {{ item.title }}

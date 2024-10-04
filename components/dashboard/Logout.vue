@@ -18,7 +18,7 @@ function logOut() {
       <AlertDialogHeader>
         <AlertDialogTitle>LogOut ?</AlertDialogTitle>
         <AlertDialogDescription>
-          Are you sure you want to log out ?
+          是否退出登录 ?
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
