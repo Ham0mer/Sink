@@ -11,7 +11,8 @@ const fetchData = async () => {
     const createdAtList = result.created_at;
     const avgDelayList = result.avg_delay;
     const loopLimit = Math.min(createdAtList.length, 300);
-    for (let i = 0; i < loopLimit; i++) {
+    const startIndex = Math.max(0, createdAtList.length - loopLimit);
+    for (let i = startIndex; i < createdAtList.length; i++) {
       const formattedTime = new Date(createdAtList[i])
         .toLocaleTimeString('zh-CN');
       const delay = avgDelayList[i];
