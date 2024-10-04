@@ -13,8 +13,7 @@ const fetchData = async () => {
     const loopLimit = Math.min(createdAtList.length, 300);
     for (let i = 0; i < loopLimit; i++) {
       const formattedTime = new Date(createdAtList[i] + 8 * 60 * 60 * 1000)
-        .toLocaleTimeString('zh-CN', { hour12: false });
-
+        .toLocaleTimeString('en-US');
       const delay = avgDelayList[i];
       timeDelayCollection.value.push({
         time: formattedDate,
