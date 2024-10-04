@@ -16,7 +16,7 @@ const fetchData = async () => {
         .toLocaleTimeString('en-US');
       const delay = avgDelayList[i];
       timeDelayCollection.value.push({
-        time: formattedDate,
+        time: formattedTime,
         ms: delay
       });
     }
@@ -34,5 +34,14 @@ onMounted(() => {
   <h2 class="font-bold text-center text-slate-600">
       每分钟延迟，来自中国内蒙古的一个随身WiFi
     </h2>
-  <AreaChart :data="timeDelayCollection" index="time" :categories="['ms']"  />
+  <AreaChart 
+    :data="timeDelayCollection" 
+    index="time" 
+    :categories="['ms']"
+    :y-formatter="(tick, i) => {
+      return typeof tick === 'number'
+        ? `${new Intl.NumberFormat('us').format(tick).toString()} 毫秒`
+        : ''
+    }"
+  />
 </template>
