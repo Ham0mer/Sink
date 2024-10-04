@@ -1,5 +1,5 @@
 <script setup>
-import { BarChart } from '@/components/ui/chart-bar'
+import { AreaChart } from '@/components/ui/chart-area'
 // 创建响应式数据
 const timeDelayCollection = ref([]);
 const loading = ref(true);
@@ -45,15 +45,5 @@ onMounted(() => {
 });
 </script>
 <template>
-  <BarChart
-    :data="timeDelayCollection"
-    index="time"
-    colors="#fdad32"
-    :categories="['ms']"
-    :y-formatter="(tick, i) => {
-      return typeof tick === 'number'
-        ? `${new Intl.NumberFormat('us').format(tick).toString()} 毫秒`
-        : ''
-    }"
-  />
+  <AreaChart :data="timeDelayCollection" index="time" :categories="['ms']" />
 </template>
