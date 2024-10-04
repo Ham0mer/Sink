@@ -18,7 +18,6 @@ async function fetchData() {
       ms: delay,
     })
   }
-  loading.value = false
 }
 onMounted(() => {
   fetchData()
