@@ -1,62 +1,54 @@
 <script setup>
 import { BarChart } from '@/components/ui/chart-bar'
+// 创建响应式数据
+const timeDelayCollection = ref([]);
+const loading = ref(true);
+const error = ref(null);
+
 // 定义获取数据的函数
-const features = ref([]);
-
-async function fetchData() {
+const fetchData = async () => {
   try {
-    const response = await fetch('https://server.dogb.cn/api/v1/monitor/16');
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
+    const response = await fetch('https://server.dogb.cn/api/v1/monitor/21');
     const data = await response.json();
-    processData(data);
-  } catch (error) {
-    console.error('Fetch error: ', error);
-  }
-}
 
-function processData(data) {
-  const dailyData = {};
-  data.result[0].created_at.forEach((timestamp, index) => {
-    const date = new Date(timestamp + 8 * 60 * 60 * 1000).toISOString().split('T')[0];
-    const delay = data.result[0].avg_delay[index];
-    if (!dailyData[date]) {
-      dailyData[date] = { avg_delay: [], count: 0 };
+    // 获取 result 的第一个元素
+    const result = data.result[0];
+    const createdAtList = result.created_at;
+    const avgDelayList = result.avg_delay;
+
+    // 确保最多循环 300 次
+    const loopLimit = Math.min(createdAtList.length, 300);
+
+    // 将时间和延迟 push 到集合
+    for (let i = 0; i < loopLimit; i++) {
+      const formattedDate = new Date(createdAtList[i] + 8 * 60 * 60 * 1000)
+        .toISOString()
+        .split('T')[0];
+
+      const delay = avgDelayList[i];
+
+      // 将数据添加到集合中
+      timeDelayCollection.value.push({
+        time: formattedDate,
+        ms: delay
+      });
     }
-    dailyData[date].avg_delay.push(delay);
-    dailyData[date].count += 1;
-  });
-let dailyResults = Object.keys(dailyData).map(date => {
-  const avgDelay = dailyData[date].avg_delay.reduce((a, b) => a + b, 0) / dailyData[date].avg_delay.length;
-  return {
-    date: date,
-    ms: parseFloat(avgDelay.toFixed(3)),
-    count: dailyData[date].count
-  };
-});
-const totalRequired = 30;
-const lastDate = new Date(dailyResults[dailyResults.length - 1]?.date);
-while (dailyResults.length < totalRequired) {
-  lastDate.setDate(lastDate.getDate() + 1);
-  dailyResults.push({
-    date: lastDate.toISOString().split('T')[0],
-    ms: 0,
-    count: 0
-  });
-}
-features.value = dailyResults.slice(0, totalRequired);
-}
+
+    // 数据加载完成
+    loading.value = false;
+  } catch (err) {
+    error.value = '数据获取失败: ' + err.message;
+    loading.value = false;
+  }
+};
 onMounted(() => {
   fetchData();
 });
 </script>
 <template>
   <BarChart
-    :data="features"
-    index="date"
+    :data="timeDelayCollection"
+    index="time"
     colors="#fdad32"
     :categories="['ms']"
     :y-formatter="(tick, i) => {
