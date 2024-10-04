@@ -32,6 +32,9 @@ onMounted(() => {
 });
 </script>
 <template>
+  <h2 class="font-bold text-center text-slate-600">
+      每分钟延迟，来自中国内蒙古的一个随身WiFi
+    </h2>
   <AreaChart 
     :data="timeDelayCollection" 
     index="time" 
