@@ -5,7 +5,8 @@ export default eventHandler(async () => {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
     const data = await response.json()
-    return data.result[4]
+    const result = data.result.find(item => item.monitor_id === 6)
+    return result
   }
   catch (error) {
     console.error('Error fetching data:', error)
