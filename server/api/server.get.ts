@@ -1,6 +1,6 @@
 export default eventHandler(async () => {
   try {
-    const response = await fetch('https://server.dogb.cn/api/v1/monitor/21')
+    const response = await fetch('https://server.dogb.cn/api/v1/monitor/17')
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
